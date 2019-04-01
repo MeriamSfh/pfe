@@ -42,7 +42,7 @@ public class tt {
 	      }*/
 	      
 	      String link = parseLink("https://api.stackexchange.com/2.2/users/2901002/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((");
-	System.out.println("link is:"+link);
+	      System.out.println("link is:"+link);
 	}
 	
 	public static String parseLink(String url) throws IOException, JSONException{
@@ -94,7 +94,7 @@ public class tt {
 	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
 	         System.out.println(mentry.getValue());
 	      }*/
-	   System.out.println("links"+Arrays.toString(links.toArray()));
+	    System.out.println("links"+Arrays.toString(links.toArray()));
 	    return hmap;	
 	}
 	
