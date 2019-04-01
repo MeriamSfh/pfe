@@ -1,0 +1,55 @@
+<MOTConfig  xmlns="exa:com.exalead.linguistic.v10">
+  <!-- Tokenizers -->
+  <StandardTokenizer >
+    <charOverrides>
+      <StandardTokenizerOverride type="token" toOverride=":" />
+    </charOverrides>
+    <patternOverrides>
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]][&amp;][[:alnum:]]" />
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]]*[.]net" />
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]]+[+]+" />
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]]+#" />
+    </patternOverrides>
+
+    <GermanDesagglutination />
+    <DutchDesagglutination />
+    <NorvegianDesagglutination />
+
+  </StandardTokenizer>
+  <!-- <CustomTokenizer classId="com.exalead.mot.components.rlp.BasisTechTokenizer">
+        <KeyValue key="resourcedir" value="resource:///rlp" />
+	<KeyValue key="language" value="ar" />
+       </CustomTokenizer>
+    -->
+  <JapaneseTokenizer resourceDir="resource:///tokenizer/ja" addRomanji="true"/>
+  <ChineseTokenizer resourceDir="resource:///tokenizer/zh/tokenizer.bin"/>
+
+  <!-- Normalizer -->
+  <NormalizerConfig>
+    <NormalizerIndexLower language="fr" word="thé" />
+    <NormalizerIndexLower language="fr" word="maïs" />
+  </NormalizerConfig>
+
+  <!-- semantic processors -->
+
+  <!-- <OntologyMatcher resourceDir="/customOntology" /> -->
+  <!-- <RulesMatcher resourceFile="/custom/" />  -->
+  <NamedEntitiesMatcher name="en" prefix="NEtest" />
+  <RelatedTermsPreprocessor name="rtpreproc" />
+  <RelatedTermsExtractor name="rte" relatedTermsMinSpan="2" relatedTermsMaxSpan="3" />
+  <PartOfSpeechTagger name="pos_fr" language="fr" />
+  <PartOfSpeechTagger name="pos_en" language="en" />
+  <PartOfSpeechTagger name="pos_it" language="it" />
+  <Lemmatizer name="lemmaFr" language="fr" />
+  <Lemmatizer name="lemmaEn" language="en" />
+  <Lemmatizer name="lemmaEs" language="es" />
+  <Lemmatizer name="lemmaIt" language="it" />
+  <Lemmatizer name="lemmaPt" language="pt" />
+  <Chunker name="chunkerFr"  language="fr"/>
+  <!-- only one chunker in a pipe is supported for the moment
+  <Chunker name="chunkerEn"  language="en"/>
+  <Chunker name="chunkerIt"  language="it"/>
+  -->
+  <SentimentAnalyzer name="sentiment" />
+
+</MOTConfig>

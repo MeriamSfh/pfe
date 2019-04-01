@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="MOTKITROOT/javabin/edk.jar"/>
+	<classpathentry kind="var" path="MOTKITROOT/javabin/semantic/semantic.jar"/>
+	<classpathentry kind="var" path="MOTKITROOT"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

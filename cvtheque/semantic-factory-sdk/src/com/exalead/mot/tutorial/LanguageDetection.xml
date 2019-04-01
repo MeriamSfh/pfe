@@ -1,0 +1,10 @@
+<MOTConfig xmlns="exa:com.exalead.linguistic.v10">
+<!-- Tokenizers -->
+<StandardTokenizer/>
+ 
+<!-- Normalizer -->
+<NormalizerConfig />
+ 
+<!-- Semantic Processors -->
+<LanguageDetector name="languageDetector" />
+</MOTConfig>

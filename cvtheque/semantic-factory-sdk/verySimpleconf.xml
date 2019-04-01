@@ -1,0 +1,23 @@
+<MOTConfig  xmlns="exa:com.exalead.linguistic.v10">
+  <!-- Tokenizers -->
+  <StandardTokenizer >
+    <charOverrides>
+      <StandardTokenizerOverride type="token" toOverride=":" />
+    </charOverrides>
+    <patternOverrides>
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]][&amp;][[:alnum:]]" />
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]]*[.]net" />
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]]+[+]+" />
+      <StandardTokenizerOverride type="token" toOverride="[[:alnum:]]+#" />
+    </patternOverrides>
+  </StandardTokenizer>
+  <JapaneseTokenizer resourceDir="resource:///tokenizer/ja" addRomanji="true"/>
+  <ChineseTokenizer resourceDir="resource:///tokenizer/zh/tokenizer.bin"/>
+
+  <!-- Normalizer -->
+  <NormalizerConfig>
+    <NormalizerIndexLower language="fr" word="thé" />
+    <NormalizerIndexLower language="fr" word="maïs" />
+  </NormalizerConfig>
+
+</MOTConfig>

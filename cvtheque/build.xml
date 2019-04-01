@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="sdk-java-customcode" basedir="." default="all">
+
+  <property file="build.properties"/>
+  <property environment="env" />
+
+  <property name="builddir" value="build/classes" />
+  <property name="distdir" value="dist" />
+  <property name="tmpfolder" value="tmp" />
+
+  <path id="classpath">
+        <fileset dir="../lib" includes="**/*.jar"/>
+  </path>
+
+  <!-- Compilation of components -->
+
+  <target name="compile-search-processors">
+    <delete dir="${builddir}" failonerror="false" />
+    <mkdir dir="${builddir}" />
+    <mkdir dir="${distdir}" />
+    <javac destdir="${builddir}" debug="true" classpathref="classpath">
+      <src path="search-processors/src" />
+    </javac>
+    <jar destfile="dist/search-processors.jar" basedir="${builddir}" />
+  </target>
+
+  <target name="compile-document-processors">
+    <delete dir="${builddir}" failonerror="false" />
+    <mkdir dir="${builddir}" />
+    <mkdir dir="${distdir}" />
+    <javac destdir="${builddir}" debug="true" classpathref="classpath">
+      <src path="document-processors/src" />
+    </javac>
+    <jar destfile="dist/document-processors.jar" basedir="${builddir}" />
+  </target>
+
+  <target name="compile-connectors">
+    <delete dir="${builddir}" failonerror="false" />
+    <mkdir dir="${builddir}" />
+    <mkdir dir="${distdir}" />
+    <javac destdir="${builddir}" debug="true" classpathref="classpath">
+      <src path="connectors/src" />
+    </javac>
+    <jar destfile="dist/connectors.jar" basedir="${builddir}" />
+  </target>
+
+  <target name="compile-security-sources">
+    <delete dir="${builddir}" failonerror="false" />
+    <mkdir dir="${builddir}" />
+    <mkdir dir="${distdir}" />
+    <javac destdir="${builddir}" debug="true" classpathref="classpath">
+      <src path="security-sources/src" />
+    </javac>
+    <jar destfile="dist/security-sources.jar" basedir="${builddir}" />
+  </target>
+
+
+  <!-- Build of plugins -->
+ 
+  <property name="plugin-search-processors-tmp" value="${tmpfolder}/plugin-search-processors" /> 
+  <target name="plugin-search-processors" depends="compile-search-processors">
+    <delete dir="${plugin-search-processors-tmp}"/>
+    <mkdir dir="${plugin-search-processors-tmp}"/>
+    <mkdir dir="${plugin-search-processors-tmp}/META-INF"/>
+    <mkdir dir="${plugin-search-processors-tmp}/lib"/>
+    <copy todir="${plugin-search-processors-tmp}/META-INF">
+      <fileset dir="search-processors/META-INF" />
+    </copy>
+    <copy todir="${plugin-search-processors-tmp}/lib" file="dist/search-processors.jar"  />
+    <zip destfile="dist/search-processors.zip"
+         basedir="${plugin-search-processors-tmp}" />
+  </target>
+
+  <property name="plugin-document-processors-tmp" value="${tmpfolder}/plugin-document-processors" /> 
+  <target name="plugin-document-processors" depends="compile-document-processors">
+    <delete dir="${plugin-document-processors-tmp}"/>
+    <mkdir dir="${plugin-document-processors-tmp}"/>
+    <mkdir dir="${plugin-document-processors-tmp}/META-INF"/>
+    <mkdir dir="${plugin-document-processors-tmp}/lib"/>
+    <copy todir="${plugin-document-processors-tmp}/META-INF">
+      <fileset dir="document-processors/META-INF" />
+    </copy>
+    <copy todir="${plugin-document-processors-tmp}/lib" file="dist/document-processors.jar"  />
+    <zip destfile="dist/document-processors.zip"
+         basedir="${plugin-document-processors-tmp}" />
+  </target>
+
+  <property name="plugin-connectors-tmp" value="${tmpfolder}/plugin-connectors" /> 
+  <target name="plugin-connectors" depends="compile-connectors">
+    <delete dir="${plugin-connectors-tmp}"/>
+    <mkdir dir="${plugin-connectors-tmp}"/>
+    <mkdir dir="${plugin-connectors-tmp}/META-INF"/>
+    <mkdir dir="${plugin-connectors-tmp}/lib"/>
+    <copy todir="${plugin-connectors-tmp}/META-INF">
+      <fileset dir="connectors/META-INF" />
+    </copy>
+    <copy todir="${plugin-connectors-tmp}/lib" file="dist/connectors.jar"  />
+    <zip destfile="dist/connectors.zip"
+         basedir="${plugin-connectors-tmp}" />
+  </target>
+
+  <property name="plugin-security-sources-tmp" value="${tmpfolder}/plugin-security-sources" /> 
+  <target name="plugin-security-sources" depends="compile-security-sources">
+    <delete dir="${plugin-security-sources-tmp}"/>
+    <mkdir dir="${plugin-security-sources-tmp}"/>
+    <mkdir dir="${plugin-security-sources-tmp}/META-INF"/>
+    <mkdir dir="${plugin-security-sources-tmp}/lib"/>
+    <copy todir="${plugin-security-sources-tmp}/META-INF">
+      <fileset dir="security-sources/META-INF" />
+    </copy>
+    <copy todir="${plugin-security-sources-tmp}/lib" file="dist/security-sources.jar"  />
+    <zip destfile="dist/security-sources.zip"
+         basedir="${plugin-security-sources-tmp}" />
+  </target>
+
+
+
+  <target name="all" depends="plugin-search-processors, plugin-document-processors, plugin-connectors, plugin-security-sources">
+
+  </target>
+
+</project>

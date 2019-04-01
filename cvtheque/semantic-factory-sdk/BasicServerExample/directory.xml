@@ -1,0 +1,23 @@
+<!-- run me with ./bin/java jexa.bee.Queen \-\-key processName mot \-\-key hostname madpc125 \-\-configuration bar:///com/exalead/mot/examples/directory.xml -->
+
+<Hive xmlns="exa:exa.bee" xmlns:bee="exa:exa.bee">
+  <DirectoryExtract bee:key="DIRECTORY" >
+    <Product name="*">
+      <BeeHost name="madpc125" >
+        <BeeProcess name="mot" >
+          <BeeServer name="MOTServer" port="10060" protocol="http">
+            <BeeService name="mot" beeKey="motInstance" inDirectory="true" type="flis" schemaName="com.exalead.mot.examples.BasicServerExample" />
+            <BeeService name="java" beeKey="java" inDirectory="false"/>
+          </BeeServer>
+        </BeeProcess>
+      </BeeHost>
+    </Product>
+  </DirectoryExtract>
+
+  <javaRuntimeServlet bee:key="java" xmlns="jexa:jexa.bee" />
+  <BasicServerExample bee:key="motInstance" xmlns="jexa:com.exalead.mot.examples" 
+    inputConfigurationFile="com/exalead/mot/examples/complexconf.xml"/>
+
+  <DirectoryLoader xmlns="jexa:jexa.bee" bee:key="mainjava" />
+
+</Hive>
