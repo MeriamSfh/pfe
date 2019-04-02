@@ -38,8 +38,6 @@ public static String parseRepos(String url) throws IOException, JSONException{
 		ClientResponse response = null;
 		response = wr.get(ClientResponse.class);
 		String response_data = response.getEntity(String.class);
-
-		
 	    return response_data;
 	}
 }
