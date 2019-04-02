@@ -125,7 +125,7 @@ public class JsonReader {
 		
 				String[] Tableau2 = new String[2];
 				
-		URL obj = new URL(repos+"?page=10&per_page=1");
+		URL obj = new URL(repos+"?page=1&per_page=1");
 		URLConnection conn = obj.openConnection();
 		
 		//get all headers
@@ -142,7 +142,7 @@ public class JsonReader {
 				String text = Tableau[k];
 				
 				if (text.contains("next")==true) {
-					link = text.substring(1, text.indexOf(";")-1);
+					link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
 					String myrepos = parse(link);
 					 reposResp = new JSONObject(myrepos.substring(myrepos.indexOf('{')));
 				}	
@@ -161,7 +161,7 @@ public class JsonReader {
 	     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	     // optional default is GET
 	     con.setRequestMethod("GET");
-	     con.setRequestProperty("Authorization", "token 9cc26815ae56d43a7238535c8dbf48ddfa2c8af2");
+	     //con.setRequestProperty("Authorization", "token 9cc26815ae56d43a7238535c8dbf48ddfa2c8af2");
 	     BufferedReader in = new BufferedReader(
 	             new InputStreamReader(con.getInputStream()));
 	     String inputLine;
