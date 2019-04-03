@@ -1,11 +1,13 @@
 package com.pfe.customcode.papifilter;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ import org.json.JSONObject;
 public class Github {
 
 	public static void main(String[] args) throws Exception {
-		HashMap<String, String> map = getMore("https://api.github.com/users/anissalam?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c");
+		HashMap<String, String> map = getMore("https://api.github.com/users/arindam-bandyopadhyay?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c");
 		
 		Set set = map.entrySet();
 	      Iterator iterator = set.iterator();
@@ -30,6 +32,23 @@ public class Github {
 
 	}
 	
+	public static List<String> getRel(String url) throws Exception{
+	URL obj = new URL(url+"?per_page=1");
+	URLConnection conn = obj.openConnection();
+	
+	//get all headers
+	Map<String, List<String>> map = conn.getHeaderFields();
+	for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+		//System.out.println("Key : " + entry.getKey() + 
+               //  " ,Value : " + entry.getValue());
+	}
+	String str = conn.getHeaderField("Link");
+	//String Tableau[] = str.split(","); 
+	List<String> strList = new ArrayList<String>(Arrays.asList(str.split(",")));
+	return strList;
+	}
+	
+	
 public static HashMap<String, String> getMore(String url) throws Exception {
 	HashMap<String, String> hmap = new HashMap<String, String>();
 	List<String> name = new ArrayList<String>();
@@ -39,9 +58,16 @@ public static HashMap<String, String> getMore(String url) throws Exception {
 		String res = parse(url);
 		JSONObject myResponse = new JSONObject(res);
 		String repos = myResponse.get("repos_url").toString();
-		//String resRepos = parse(repos);
+		String resRepos = parse(repos+"?page=1&per_page=1");
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		name.add(myFirstRespos.get("name").toString()) ;
+		 description.add(myFirstRespos.get("description").toString()) ;
+		 langage.add(myFirstRespos.get("language").toString()) ;
+		 hmap.put(myFirstRespos.get("name").toString()+" : "+myFirstRespos.get("description").toString(), myFirstRespos.get("language").toString());
+		 
+		 List<String> strList = getRel(repos);
 		
-		URL obj = new URL(repos+"?page=1&per_page=1&"+"client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c");
+		/*URL obj = new URL(repos+"?per_page=1");
 		URLConnection conn = obj.openConnection();
 		
 		//get all headers
@@ -51,24 +77,34 @@ public static HashMap<String, String> getMore(String url) throws Exception {
 	                 " ,Value : " + entry.getValue());
 		}
 		String str = conn.getHeaderField("Link");
-		String Tableau[] = str.split(","); 
+		//String Tableau[] = str.split(","); 
+		List<String> strList = new ArrayList<String>(Arrays.asList(str.split(",")));*/
 		
+		
+		boolean trouve = false;
 			int k = 0;
-			while (k<=Tableau.length-1) {
-				String text = Tableau[k];
+			String link = null;
+			while (k<=strList.size() ) {
+				String text = strList.get(k);
 				if (text.contains("next")==true) {
 					//String link = repos+"?page="+p+"&per_page=1";
-					String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+			 link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
 					String myrepos = parse(link+"&client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c");
+					
+					
+					
 					JSONObject myRespos = new JSONObject(myrepos.substring(myrepos.indexOf('{')));
 					 name.add(myRespos.get("name").toString()) ;
 					 description.add(myRespos.get("description").toString()) ;
 					 langage.add(myRespos.get("language").toString()) ;
 					 hmap.put(myRespos.get("name").toString()+" : "+myRespos.get("description").toString(), myRespos.get("language").toString());
-					 
+					 //trouve = true;
+					// strList = getRel(link);
+				}else {
+					k++;
 				}
 				
-				k++;
+				
 			}
 			
 		return hmap;

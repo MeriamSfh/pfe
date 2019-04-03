@@ -21,19 +21,20 @@ import com.exalead.util.StringUtils;
 public class JsonReader {
 
 	public static void main(String[] args) throws Exception {
-		/*String res = parse("https://api.github.com/users/AdamLindenthal");
+		/*String res = parse("https://api.github.com/users/arindam-bandyopadhyay");
 		JSONObject myResponse = new JSONObject(res);
 		String repos = myResponse.get("repos_url").toString();
 		System.out.println("url repos"+repos);
-		String myrepos = parse(repos+"?page=1&per_page=1");
+		String myrepos = parse(repos);
 		JSONObject reposResp = new JSONObject(myrepos.substring(myrepos.indexOf('{')));
-		System.out.println("repos!"+reposResp.toString());*/
+		System.out.println("repos!"+reposResp.toString());
+		/*
 		
 		
-		//Boolean s = getMore("https://api.github.com/users/AdamLindenthal/repos?page=10&per_page=1");
-		//System.out.println(s);
-		String name = getReposName("https://api.github.com/users/AdamLindenthal");
-		System.out.println(name);
+		Boolean s = getMore("https://api.github.com/users/AdamLindenthal/repos?page=10&per_page=1");
+		System.out.println(s);
+		//String name = getReposName("https://api.github.com/users/AdamLindenthal");
+		//System.out.println(name);
 		//String desc = getReposDescription("https://api.github.com/users/AdamLindenthal");
 		//System.out.println("des: "+desc);
 		//String lang = getReposLangages("https://api.github.com/users/AdamLindenthal");
@@ -42,6 +43,8 @@ public class JsonReader {
 		//System.out.println(str);
 		//String more = getMore("https://api.github.com/users/AdamLindenthal/repos?page=1&per_page=1");
 		//System.out.println(more);
+		 
+		 
 		/*URL obj = new URL("https://api.github.com/users/AdamLindenthal/repos?page=1&per_page=1");
 		URLConnection conn = obj.openConnection();
 		
