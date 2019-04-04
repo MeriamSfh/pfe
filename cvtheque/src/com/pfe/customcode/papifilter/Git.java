@@ -19,7 +19,7 @@ import org.json.JSONObject;
 public class Git {
 
 	public static void main(String[] args) throws Exception {
-HashMap<String, String> map = getMore("https://api.github.com/users/arindam-bandyopadhyay/repos");
+HashMap<String, String> map = getMore("https://api.github.com/users/bshannon/repos");
 		
 		Set set = map.entrySet();
 	      Iterator iterator = set.iterator();
@@ -35,6 +35,7 @@ HashMap<String, String> map = getMore("https://api.github.com/users/arindam-band
 	public static HashMap<String, String> getMore(String url) throws Exception  {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, String> map2 = new HashMap<String, String>();
 		map = getRepos(url+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
 		
 		URL obj = new URL(url+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
@@ -44,13 +45,20 @@ HashMap<String, String> map = getMore("https://api.github.com/users/arindam-band
 		
 		boolean trouve = false;
 		int k = 0;
-		while (k<=strList.size() && trouve==false ) {
+		while (k<strList.size() && trouve==false ) {
 			String text = strList.get(k);
 			if (text.contains("next")==true) {
 				//String link = repos+"?page="+p+"&per_page=1";
 				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
-				 map = getRepos(link);
-				trouve = true;
+				map2 = getRepos(link);
+				map.putAll(map2);
+				
+				
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+				// trouve = true;
 				 
 			}else {
 				k++;
