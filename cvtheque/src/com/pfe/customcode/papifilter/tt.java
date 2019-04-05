@@ -28,18 +28,18 @@ public class tt {
 
 	public static void main(String[] args) throws IOException, JSONException {
 		
-		//List<String> ans = parseAnswers("https://api.stackexchange.com/2.2/users/2901002/answers?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((");
+		List<String> ans = parseAnswers("https://api.stackexchange.com/2.2/users/2901002/answers?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((");
 		
-		//System.out.println("final result is:"+Arrays.toString(ans.toArray()));
+		System.out.println("final result is:"+Arrays.toString(ans.toArray()));
 		
-		//HashMap<String, String> ques = parseQuestions("https://api.stackexchange.com/2.2/users/2901002/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((");
-		/*Set set = ques.entrySet();
+		HashMap<String, String> ques = parseQuestions("https://api.stackexchange.com/2.2/users/2901002/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((");
+		Set set = ques.entrySet();
 	      Iterator iterator = set.iterator();
 	      while(iterator.hasNext()) {
 	         Map.Entry mentry = (Map.Entry)iterator.next();
 	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
 	         System.out.println(mentry.getValue());
-	      }*/
+	      }
 	      
 	      String link = parseLink("https://api.stackexchange.com/2.2/users/2901002/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((");
 	      System.out.println("link is:"+link);

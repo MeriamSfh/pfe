@@ -17,6 +17,8 @@ import java.util.Map.Entry;
 
 import org.json.JSONObject;
 
+import com.exalead.papi.helper.Meta;
+
 public class Git {
 
 	public static void main(String[] args) throws Exception {
@@ -29,14 +31,22 @@ HashMap<String, String> map = getMore("bshannon");
 	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
 	         System.out.println(mentry.getValue());
 	      }*/
-	      
+		List<String> titles = new ArrayList<String>();
+		List<String> langages = new ArrayList<String>();
 	      
 	      for (Entry<String, String> entry : map.entrySet()) {
-			    String key = entry.getKey();
-			    String tab = entry.getValue();
-			    System.out.print("key is: "+key );
-		         System.out.println("Value is: "+tab);
+	    	  titles.add(entry.getKey()) ;
+	    	  langages.add(entry.getValue()) ;
 			}
+	      
+	      int i=0;
+	      while (i<titles.size()) {
+			String title = titles.get(i);
+			String lang = langages.get(i);
+			System.out.println(title+" && "+lang);
+			i++;
+			
+		}
 		
 	      String link = getLink("bshannon");
 	      System.out.println("link is: "+link);
@@ -50,6 +60,7 @@ HashMap<String, String> map = getMore("bshannon");
 	      String s3= Integer.toString(followers);
 	      System.out.println("followers : "+followers);
 
+	      
 	}
 	
 	public static int getfollowers(String login) throws Exception{

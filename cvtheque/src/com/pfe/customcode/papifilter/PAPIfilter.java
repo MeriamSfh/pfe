@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 import com.exalead.config.bean.PropertyLabel;
@@ -28,6 +29,7 @@ import com.exalead.papi.helper.pipe.PipedPushAPI;
 @CVComponentDescription(value = "Description")
 public class PAPIfilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
 
+	private Logger logger = Logger.getLogger(PAPIfilter.class);
 	public PAPIfilter(PushAPI parent, PAPIfilterConfig config) {
 		super(parent);
 	}
@@ -40,6 +42,8 @@ public class PAPIfilter extends PipedPushAPI implements CVComponent, PushAPIFilt
 		int following = 0;
 		int followers = 0;
 		int nbreRepos = 0;
+		List<String> titles = new ArrayList<String>();
+		List<String> langages = new ArrayList<String>();
 		
 		try {
 			 link = getLink(login_git);
@@ -47,25 +51,25 @@ public class PAPIfilter extends PipedPushAPI implements CVComponent, PushAPIFilt
 			 followers = getfollowers(login_git);
 			 nbreRepos = getNbreRepos(login_git);
 			 map = getMore(login_git);
-			
-			for (Entry<String, String> entry : map.entrySet()) {
-			    String key = entry.getKey();
-			    String tab = entry.getValue();
-			}
+			 for (Entry<String, String> entry : map.entrySet()) {
+		    	  titles.add(entry.getKey()) ;
+		    	  langages.add(entry.getValue()) ;
+				}
 			
 		} catch (Exception e) {
-			System.out.println("error ");
+			logger.info("error !!! ");
 		}
 		document.addMeta("link", link);
 		document.addMeta("following", Integer.toString(following));
 		document.addMeta("followers", Integer.toString(followers));
-		document.addMeta("nombre total de repositories", Integer.toString(nbreRepos));
-		for (Entry<String, String> entry : map.entrySet()) {
-			document.addMeta("nombre total de repositories", Integer.toString(nbreRepos));
-			document.addMeta("nombre total de repositories", Integer.toString(nbreRepos));
-		    String key = entry.getKey();
-		    String tab = entry.getValue();
-		}
+		document.addMeta("nombre-total-de-repositories", Integer.toString(nbreRepos));
+		 int i=0;
+	      while (i<titles.size()) {
+			String title = titles.get(i);
+			String lang = langages.get(i);
+			document.addMeta("repository", title+" langage: "+lang);
+			i++;
+	      }
 		this.parent.addDocument(document);
 	}
 	
