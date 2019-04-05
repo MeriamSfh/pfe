@@ -3,53 +3,70 @@ package com.pfe.customcode.papifilter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import org.json.JSONObject;
 
-public class Git {
+import com.exalead.config.bean.PropertyLabel;
+import com.exalead.mercury.component.CVComponent;
+import com.exalead.mercury.component.CVComponentDescription;
+import com.exalead.mercury.component.config.CVComponentConfigClass;
+import com.exalead.papi.framework.connectors.PushAPIFilter;
+import com.exalead.papi.helper.Document;
+import com.exalead.papi.helper.PushAPI;
+import com.exalead.papi.helper.PushAPIException;
+import com.exalead.papi.helper.pipe.PipedPushAPI;
 
-	public static void main(String[] args) throws Exception {
-HashMap<String, String> map = getMore("bshannon");
+@PropertyLabel(value = "Label")
+@CVComponentConfigClass(configClass = PAPIfilterConfig.class)
+@CVComponentDescription(value = "Description")
+public class PAPIfilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
+
+	public PAPIfilter(PushAPI parent, PAPIfilterConfig config) {
+		super(parent);
+	}
+	
+	@Override
+	public void addDocument(Document document) throws PushAPIException {
+		String login_git = document.getMetaContainer().getMeta("login_git").getValue();
+		HashMap<String, String> map = new HashMap<String, String>();
+		String link = "";
+		int following = 0;
+		int followers = 0;
+		int nbreRepos = 0;
 		
-		/*Set set = map.entrySet();
-	      Iterator iterator = set.iterator();
-	      while(iterator.hasNext()) {
-	         Map.Entry mentry = (Map.Entry)iterator.next();
-	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
-	         System.out.println(mentry.getValue());
-	      }*/
-	      
-	      
-	      for (Entry<String, String> entry : map.entrySet()) {
+		try {
+			 link = getLink(login_git);
+			 following = getfollowing(login_git);
+			 followers = getfollowers(login_git);
+			 nbreRepos = getNbreRepos(login_git);
+			 map = getMore(login_git);
+			
+			for (Entry<String, String> entry : map.entrySet()) {
 			    String key = entry.getKey();
 			    String tab = entry.getValue();
-			    System.out.print("key is: "+key );
-		         System.out.println("Value is: "+tab);
 			}
-		
-	      String link = getLink("bshannon");
-	      System.out.println("link is: "+link);
-	      int nbre = getNbreRepos("bshannon");
-	      String s= Integer.toString(nbre);
-	      System.out.println("nbre : "+nbre);
-	      int following = getfollowing("bshannon");
-	      String s2= Integer.toString(following);
-	      System.out.println("following : "+following);
-	      int followers = getfollowers("bshannon");
-	      String s3= Integer.toString(followers);
-	      System.out.println("followers : "+followers);
-
+			
+		} catch (Exception e) {
+			System.out.println("error ");
+		}
+		document.addMeta("link", link);
+		document.addMeta("following", Integer.toString(following));
+		document.addMeta("followers", Integer.toString(followers));
+		document.addMeta("nombre total de repositories", Integer.toString(nbreRepos));
+		for (Entry<String, String> entry : map.entrySet()) {
+			document.addMeta("nombre total de repositories", Integer.toString(nbreRepos));
+			document.addMeta("nombre total de repositories", Integer.toString(nbreRepos));
+		    String key = entry.getKey();
+		    String tab = entry.getValue();
+		}
+		this.parent.addDocument(document);
 	}
 	
 	public static int getfollowers(String login) throws Exception{
@@ -149,5 +166,8 @@ public static String parse(String purl) throws Exception {
 	    in.close();
 		return response.toString();
 	}
+
+	
+	
 
 }
