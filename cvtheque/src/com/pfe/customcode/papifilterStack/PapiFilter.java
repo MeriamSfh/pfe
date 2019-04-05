@@ -1,53 +1,67 @@
-package com.pfe.customcode.papifilter;
+package com.pfe.customcode.papifilterStack;
 
-import java.util.List;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
+import com.exalead.config.bean.PropertyLabel;
+import com.exalead.mercury.component.CVComponent;
+import com.exalead.mercury.component.CVComponentDescription;
+import com.exalead.mercury.component.config.CVComponentConfigClass;
+import com.exalead.papi.framework.connectors.PushAPIFilter;
+import com.exalead.papi.helper.Document;
+import com.exalead.papi.helper.PushAPI;
+import com.exalead.papi.helper.PushAPIException;
+import com.exalead.papi.helper.pipe.PipedPushAPI;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
-import java.util.Set;
-import java.util.Map;
-import java.util.Iterator;
 
-public class tt {
+@PropertyLabel(value = "Label")
+@CVComponentConfigClass(configClass = PapiFilterConfig.class)
+@CVComponentDescription(value = "Description")
+public class PapiFilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
 
-	public static void main(String[] args) throws IOException, JSONException {
-		
-		
-		List<String> ans = parseAnswers("2901002");
-		
-		System.out.println("final result is:"+Arrays.toString(ans.toArray()));
-		
-		List<String> ques = parseQuestions("2901002");
-		for (int i = 0; i < ques.size(); i++) {
-			String q = ques.get(i);
-			System.out.println(q);
+	private Logger logger = Logger.getLogger(PapiFilter.class);
+	public PapiFilter(PushAPI parent, PapiFilterConfig config) {
+		super(parent);
+	}
+	@Override
+	public void addDocument(Document document) throws PushAPIException {
+		List<String> tags = new ArrayList<String>();
+		List<String> questions = new ArrayList<String>();
+		List<String> answers = new ArrayList<String>();
+		String link = "";
+		String login = document.getMetaContainer().getMeta("login_stackoverflow").getValue();
+		String login_stack = login.substring(0, login.indexOf("/"));
+		try {
+			tags = parseTags(login_stack);
+			link = parseLink(login_stack);
+			questions = parseQuestions(login_stack);
+			answers = parseAnswers(login_stack);
+		} catch (Exception e) {
+			logger.info("error in stackoverflow !!! ");
 		}
-		
-	      
-	      String link = parseLink("2901002");
-	      System.out.println("link is:"+link);
-	      
-	      List<String> str = parseTags("2901002");
-	      for (int i = 0; i < str.size(); i++) {
-				String q = str.get(i);
-				System.out.println(q);
-			}
+		document.addMeta("linkStack", link);
+		for (int i = 0; i < tags.size(); i++) {
+			document.addMeta("tagsStack", tags.get(i));
+		}
+		for (int i = 0; i < questions.size(); i++) {
+			document.addMeta("questions", questions.get(i));
+		}
+		for (int i = 0; i < answers.size(); i++) {
+			document.addMeta("answers", answers.get(i));
+		}
+		this.parent.addDocument(document);
 	}
 	
 	public static List<String> parseTags(String login) throws IOException, JSONException{
@@ -156,6 +170,13 @@ public class tt {
 	    inputStream.close();
 	    byte[] result = Arrays.copyOf(readBuffer, read);
 	    return result;
+	}
+	
+	@Override
+	public void addDocumentList(Document[] documents) throws PushAPIException {
+		for (Document document : documents) {
+			addDocument(document);
+		}
 	}
 
 }

@@ -59,7 +59,7 @@ public class PAPIfilter extends PipedPushAPI implements CVComponent, PushAPIFilt
 		} catch (Exception e) {
 			logger.info("error !!! ");
 		}
-		document.addMeta("link", link);
+		document.addMeta("linkGit", link);
 		document.addMeta("following", Integer.toString(following));
 		document.addMeta("followers", Integer.toString(followers));
 		document.addMeta("nombre-total-de-repositories", Integer.toString(nbreRepos));
@@ -171,7 +171,12 @@ public static String parse(String purl) throws Exception {
 		return response.toString();
 	}
 
-	
+@Override
+public void addDocumentList(Document[] documents) throws PushAPIException {
+	for (Document document : documents) {
+		addDocument(document);
+	}
+}
 	
 
 }
