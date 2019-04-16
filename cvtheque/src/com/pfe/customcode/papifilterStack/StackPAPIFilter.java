@@ -26,13 +26,13 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-@PropertyLabel(value = "Label")
-@CVComponentConfigClass(configClass = PapiFilterConfig.class)
-@CVComponentDescription(value = "Description")
-public class PapiFilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
+@PropertyLabel(value = "Stack")	
+@CVComponentConfigClass(configClass = StackPAPIFilterConfig.class)
+@CVComponentDescription(value = "Stack papi filter")
+public class StackPAPIFilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
 
-	private Logger logger = Logger.getLogger(PapiFilter.class);
-	public PapiFilter(PushAPI parent, PapiFilterConfig config) {
+	private Logger logger = Logger.getLogger(StackPAPIFilter.class);
+	public StackPAPIFilter(PushAPI parent, StackPAPIFilterConfig config) {
 		super(parent);
 	}
 	@Override

@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/360-admin-client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/360-commons-public.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/360-mashup-ui-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/access-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/boxcrawl-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-alerting-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-core-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-indexing-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-java-plugin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-merchandising-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-sdk-java-clients.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-cli-1.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-httpclient.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-httpclient-failover-0.0.14.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-io.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-lang3-3.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/consolidation-java-client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/convert-http.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/core-java-connectors-xmlprocessors.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cvcore-sdk.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/edk.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/edkbase.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/edkcommons.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/errorcodes.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/expand-java-client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-annotations-2.4.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-core-2.4.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-databind-2.4.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-module-jaxb-annotations-2.4.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-continuation-8.1.4.v20120524.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-http-8.1.4.v20120524.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-io-8.1.4.v20120524.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-security-8.1.4.v20120524.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-server-8.1.4.v20120524.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-servlet-8.1.4.v20120524.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-util-8.1.4.v20120524.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mami-java-client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mercury-adminui-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mercury-adminui-confgen.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mercury-crawlfetch-apis.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-connector.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-containerMultithreadedConnector.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-datainteg-commons.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-multithreadedConnector.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/platform-base.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/search-java-client.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/security-java-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/semantic.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/servlet-api-3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/samples/connectors/samples/cv-papifilter-sample-plugin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/samples/connectors/samples/example-filesystem-connector.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/samples/connectors/samples/example-multithreaded-filesystem-connector.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/360-mashup-ui-api-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/access-apis-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/cloudview-alerting-apis-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/cloudview-core-apis-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/cloudview-indexing-apis-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/consolidation-java-client-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/edkcommons-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/errorcodes-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/mami-java-client-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/papi-java-connector-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/papi-java-containerMultithreadedConnector-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/papi-java-multithreadedConnector-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/search-java-client-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/security-java-api-src.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/java-json.jar/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/jersey/jar_files (2)/jersey-client-1.19.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/jersey/jar_files (2)/jersey-core-1.19.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/jersey/jar_files (2)/jsr311-api-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/gson-2.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/org.codehaus.jackson.mapper.jar/org.codehaus.jackson.mapper.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/360-admin-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/360-commons-public.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/360-mashup-ui-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/access-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/boxcrawl-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-alerting-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-core-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-indexing-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-java-plugin.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-merchandising-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cloudview-sdk-java-clients.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-cli-1.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-codec-1.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-httpclient.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-httpclient-failover-0.0.14.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-io.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-lang-2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-lang3-3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/commons-logging-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/consolidation-java-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/convert-http.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/core-java-connectors-xmlprocessors.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/cvcore-sdk.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/edk.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/edkbase.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/edkcommons.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/errorcodes.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/expand-java-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-annotations-2.4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-core-2.4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-databind-2.4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jackson-module-jaxb-annotations-2.4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-continuation-8.1.4.v20120524.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-http-8.1.4.v20120524.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-io-8.1.4.v20120524.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-security-8.1.4.v20120524.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-server-8.1.4.v20120524.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-servlet-8.1.4.v20120524.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/jetty-util-8.1.4.v20120524.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/log4j-1.2.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mami-java-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mercury-adminui-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mercury-adminui-confgen.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/mercury-crawlfetch-apis.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-connector.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-containerMultithreadedConnector.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-datainteg-commons.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/papi-java-multithreadedConnector.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/platform-base.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/search-java-client.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/security-java-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/semantic.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/lib/servlet-api-3.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/samples/connectors/samples/cv-papifilter-sample-plugin.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/samples/connectors/samples/example-filesystem-connector.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/samples/connectors/samples/example-multithreaded-filesystem-connector.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/360-mashup-ui-api-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/access-apis-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/cloudview-alerting-apis-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/cloudview-core-apis-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/cloudview-indexing-apis-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/consolidation-java-client-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/edkcommons-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/errorcodes-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/mami-java-client-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/papi-java-connector-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/papi-java-containerMultithreadedConnector-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/papi-java-multithreadedConnector-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/search-java-client-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/sdk/java-customcode/src/security-java-api-src.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/java-json.jar/java-json.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/jersey/jar_files (2)/jersey-client-1.19.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/jersey/jar_files (2)/jersey-core-1.19.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/jersey/jar_files (2)/jsr311-api-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/gson-2.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/org.codehaus.jackson.mapper.jar/org.codehaus.jackson.mapper.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_201"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

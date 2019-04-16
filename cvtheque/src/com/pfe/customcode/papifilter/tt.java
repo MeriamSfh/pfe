@@ -29,7 +29,7 @@ public class tt {
 	public static void main(String[] args) throws IOException, JSONException {
 		
 		
-		List<String> ans = parseAnswers("2901002");
+		/*List<String> ans = parseAnswers("2901002");
 		
 		System.out.println("final result is:"+Arrays.toString(ans.toArray()));
 		
@@ -41,13 +41,15 @@ public class tt {
 		
 	      
 	      String link = parseLink("2901002");
-	      System.out.println("link is:"+link);
+	      System.out.println("link is:"+link);*/
 	      
 	      List<String> str = parseTags("2901002");
-	      for (int i = 0; i < str.size(); i++) {
+	      /*for (int i = 0; i < str.size(); i++) {
 				String q = str.get(i);
 				System.out.println(q);
-			}
+			}*/
+	      
+	      
 	}
 	
 	public static List<String> parseTags(String login) throws IOException, JSONException{
@@ -57,7 +59,11 @@ public class tt {
 		String message = new String(result, "UTF-8");
 	    JSONObject myResponse = new JSONObject(message);  
 		JSONArray arr = new JSONArray();
+		
 		arr = myResponse.getJSONArray("items");
+		for (int i = 0; i < arr.length(); i++) {
+			System.out.println("!!!!!!!!!!!!!!"+arr.getJSONObject(i));
+		}
 		for (int i = 0; i < arr.length(); i++) {
 			tags.add(arr.getJSONObject(i).get("name").toString()) ;
 		}

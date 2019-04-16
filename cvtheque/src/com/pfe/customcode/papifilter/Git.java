@@ -22,8 +22,9 @@ import com.exalead.papi.helper.Meta;
 public class Git {
 
 	public static void main(String[] args) throws Exception {
-HashMap<String, String> map = getMore("bshannon");
-		
+		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
+		hmap = getMore("bshannon");
+
 		/*Set set = map.entrySet();
 	      Iterator iterator = set.iterator();
 	      while(iterator.hasNext()) {
@@ -31,15 +32,38 @@ HashMap<String, String> map = getMore("bshannon");
 	         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
 	         System.out.println(mentry.getValue());
 	      }*/
-		List<String> titles = new ArrayList<String>();
+	
+		List<String> names = new ArrayList<String>();
 		List<String> langages = new ArrayList<String>();
+		List<String> description = new ArrayList<String>();
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		 
+		for (Entry<String, HashMap<String, String>> entry : hmap.entrySet()) {
+			names.add(entry.getKey()) ;
+			
+			map = hmap.get(entry.getKey());
+		      for (Entry<String, String> entry2 : map.entrySet()) {
+		    	  
+		    	
+		    	  langages.add(entry2.getKey()) ;
+		      
+		    	  description.add(entry2.getValue()) ;
+		    	  
+				}
+			
+		}
+		
+		
+		for (int i = 0; i < names.size(); i++) {
+			System.out.println(names.get(i)+"langages: "+langages.get(i)+"description: "+description.get(i));
+	    	 
+		}
 	      
-	      for (Entry<String, String> entry : map.entrySet()) {
-	    	  titles.add(entry.getKey()) ;
-	    	  langages.add(entry.getValue()) ;
-			}
+		
+	
 	      
-	      int i=0;
+	      /*int i=0;
 	      while (i<titles.size()) {
 			String title = titles.get(i);
 			String lang = langages.get(i);
@@ -59,7 +83,7 @@ HashMap<String, String> map = getMore("bshannon");
 	      int followers = getfollowers("bshannon");
 	      String s3= Integer.toString(followers);
 	      System.out.println("followers : "+followers);
-
+*/
 	      
 	}
 	
@@ -101,12 +125,15 @@ HashMap<String, String> map = getMore("bshannon");
 		return link;
 	}
 	
-	public static HashMap<String, String> getMore(String login) throws Exception  {
+	public static HashMap<String, HashMap<String, String>> getMore(String login) throws Exception  {
 		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
 		String urlRepos =getApiRepos(url);
-		HashMap<String, String> map = new HashMap<String, String>();
-		HashMap<String, String> map2 = new HashMap<String, String>();
-		map = getRepos(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		
+		
+		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
+		HashMap<String, HashMap<String, String>> hmap2 = new HashMap<String, HashMap<String, String>>();
+		
+		hmap = getRepos(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
 		
 		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
 		URLConnection conn = obj.openConnection();
@@ -117,8 +144,8 @@ HashMap<String, String> map = getMore("bshannon");
 			String text = strList.get(k);
 			if (text.contains("next")==true) {
 				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
-				map2 = getRepos(link);
-				map.putAll(map2);
+				hmap2 = getRepos(link);
+				hmap.putAll(hmap2);
 				URL obj2 = new URL(link);
 				URLConnection conn2 = obj2.openConnection();
 				String str2 = conn2.getHeaderField("Link");
@@ -127,20 +154,22 @@ HashMap<String, String> map = getMore("bshannon");
 				k++;
 			}
 		}
-		return map;
+		return hmap;
 	}
 	
-	public static HashMap<String, String> getRepos(String url) throws Exception{
-		HashMap<String, String> hmap = new HashMap<String, String>();
+	public static HashMap<String, HashMap<String, String>> getRepos(String url) throws Exception{
+		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
+		HashMap<String, String> hmap2 = new HashMap<String, String>();
 		List<String> name = new ArrayList<String>();
 		List<String> description = new ArrayList<String>();
 		List<String> langage = new ArrayList<String>();
 		String resRepos = parse(url);
 		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
-		name.add(myFirstRespos.get("name").toString()) ;
-		description.add(myFirstRespos.get("description").toString()) ;
-		langage.add(myFirstRespos.get("language").toString()) ;
-		hmap.put(myFirstRespos.get("name").toString()+" : "+myFirstRespos.get("description").toString(), myFirstRespos.get("language").toString());
+		//name.add(myFirstRespos.get("name").toString()) ;
+		//description.add(myFirstRespos.get("description").toString()) ;
+		//langage.add(myFirstRespos.get("language").toString()) ;
+		hmap2.put(myFirstRespos.get("language").toString() , myFirstRespos.get("description").toString());
+		hmap.put(myFirstRespos.get("name").toString(), hmap2);
 		 
 		return hmap;
 	}

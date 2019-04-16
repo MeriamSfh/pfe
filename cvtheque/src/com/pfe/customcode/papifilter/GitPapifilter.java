@@ -25,12 +25,12 @@ import com.exalead.papi.helper.PushAPIException;
 import com.exalead.papi.helper.pipe.PipedPushAPI;
 
 @PropertyLabel(value = "Label")
-@CVComponentConfigClass(configClass = PAPIfilterConfig.class)
-@CVComponentDescription(value = "Description")
-public class PAPIfilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
+@CVComponentConfigClass(configClass = GitPapifilterConfig.class)
+@CVComponentDescription(value = "Git papi filter")
+public class GitPapifilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
 
-	private Logger logger = Logger.getLogger(PAPIfilter.class);
-	public PAPIfilter(PushAPI parent, PAPIfilterConfig config) {
+	private Logger logger = Logger.getLogger(GitPapifilter.class);
+	public GitPapifilter(PushAPI parent, GitPapifilterConfig config) {
 		super(parent);
 	}
 	
@@ -59,10 +59,10 @@ public class PAPIfilter extends PipedPushAPI implements CVComponent, PushAPIFilt
 		} catch (Exception e) {
 			logger.info("error !!! ");
 		}
-		document.addMeta("linkGit", link);
+		document.addMeta("linkgit", link);
 		document.addMeta("following", Integer.toString(following));
 		document.addMeta("followers", Integer.toString(followers));
-		document.addMeta("nombre-total-de-repositories", Integer.toString(nbreRepos));
+		document.addMeta("nombrerepositories", Integer.toString(nbreRepos));
 		 int i=0;
 	      while (i<titles.size()) {
 			String title = titles.get(i);
