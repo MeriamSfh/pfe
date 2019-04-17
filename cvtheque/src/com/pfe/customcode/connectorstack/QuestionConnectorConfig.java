@@ -1,10 +1,10 @@
-package com.pfe.customcode.connectorgit;
+package com.pfe.customcode.connectorstack;
 
 import com.exalead.config.bean.IsMandatory;
 import com.exalead.config.bean.PropertyLabel;
 import com.exalead.papi.framework.connectors.ConnectorConfig;
 
-public class DbConneectorConfig extends ConnectorConfig {
+public class QuestionConnectorConfig extends ConnectorConfig {
 	protected String url = null; 
 	protected String driver = null;
 	

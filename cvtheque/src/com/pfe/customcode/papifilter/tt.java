@@ -21,6 +21,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Iterator;
 
@@ -29,25 +30,27 @@ public class tt {
 	public static void main(String[] args) throws IOException, JSONException {
 		
 		
-		/*List<String> ans = parseAnswers("2901002");
+		List<String> ans = parseAnswers("5173426");
 		
 		System.out.println("final result is:"+Arrays.toString(ans.toArray()));
 		
-		List<String> ques = parseQuestions("2901002");
-		for (int i = 0; i < ques.size(); i++) {
-			String q = ques.get(i);
-			System.out.println(q);
-		}
+		HashMap<String, String> ques = parseQuestions("5173426");
+		for (Entry<String, String> entry2 : ques.entrySet()) {
+	    	  String title = entry2.getKey() ;
+	    	  String q = entry2.getValue() ;
+	    	  System.out.println("key "+title+"\n value "+q);
+			}
+		
 		
 	      
-	      String link = parseLink("2901002");
-	      System.out.println("link is:"+link);*/
+	      String link = parseLink("5173426");
+	      System.out.println("link is:"+link);
 	      
-	      List<String> str = parseTags("2901002");
-	      /*for (int i = 0; i < str.size(); i++) {
+	      List<String> str = parseTags("5173426");
+	      for (int i = 0; i < str.size(); i++) {
 				String q = str.get(i);
 				System.out.println(q);
-			}*/
+			}
 	      
 	      
 	}
@@ -61,9 +64,7 @@ public class tt {
 		JSONArray arr = new JSONArray();
 		
 		arr = myResponse.getJSONArray("items");
-		for (int i = 0; i < arr.length(); i++) {
-			System.out.println("!!!!!!!!!!!!!!"+arr.getJSONObject(i));
-		}
+		
 		for (int i = 0; i < arr.length(); i++) {
 			tags.add(arr.getJSONObject(i).get("name").toString()) ;
 		}
@@ -82,18 +83,17 @@ public class tt {
 	    return str;	
 	}
 	
-	public static List<String> parseQuestions(String login) throws IOException, JSONException{
+	public static HashMap<String, String> parseQuestions(String login) throws IOException, JSONException{
 		
 		String url = "https://api.stackexchange.com/2.2/users/"+login+"/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((";
-		List<String> questions = new ArrayList<String>();
+		HashMap<String, String> map = new HashMap<String, String>();
 		
 		byte[] result = parse(url);
 		String message = new String(result, "UTF-8");
 	    JSONObject myResponse = new JSONObject(message);
 	    JSONArray arr1 = new JSONArray();
 		arr1 = myResponse.getJSONArray("items");
-		
-		questions.add("title: "+arr1.getJSONObject(0).get("title").toString()+" & link: "+arr1.getJSONObject(0).get("link").toString());
+		map.put(arr1.getJSONObject(0).get("title").toString(), arr1.getJSONObject(0).get("link").toString());
 		
 	    Boolean more = myResponse.getBoolean("has_more");
 	    int p=2;
@@ -105,12 +105,11 @@ public class tt {
 			JSONObject myResp = new JSONObject(mess);
 			JSONArray arr = new JSONArray();
 			arr = myResp.getJSONArray("items");
-		    
-		    	questions.add("title: "+arr.getJSONObject(0).get("title").toString()+" & link: "+arr.getJSONObject(0).get("link").toString());
+			map.put(arr.getJSONObject(0).get("title").toString(),arr.getJSONObject(0).get("link").toString() );
 		    
 		    p++;
 	    }
-	    return questions;	
+	    return map;	
 	}
 	
 	

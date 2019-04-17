@@ -34,6 +34,10 @@ public class GitPapifilter extends PipedPushAPI implements CVComponent, PushAPIF
 		super(parent);
 	}
 	
+	
+	
+	
+	
 	@Override
 	public void addDocument(Document document) throws PushAPIException {
 		String login_git = document.getMetaContainer().getMeta("login_git").getValue();

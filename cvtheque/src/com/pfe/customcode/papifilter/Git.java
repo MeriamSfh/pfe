@@ -23,7 +23,7 @@ public class Git {
 
 	public static void main(String[] args) throws Exception {
 		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
-		hmap = getMore("bshannon");
+		hmap = getMore("anissalam");
 
 		/*Set set = map.entrySet();
 	      Iterator iterator = set.iterator();
@@ -138,7 +138,11 @@ public class Git {
 		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
 		URLConnection conn = obj.openConnection();
 		String str = conn.getHeaderField("Link");
-		List<String> strList = new ArrayList<String>(Arrays.asList(str.split(",")));
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
 		int k = 0;
 		while (k<strList.size()) {
 			String text = strList.get(k);
@@ -153,6 +157,7 @@ public class Git {
 			}else {
 				k++;
 			}
+		}
 		}
 		return hmap;
 	}
