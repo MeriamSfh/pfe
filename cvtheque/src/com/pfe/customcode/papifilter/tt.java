@@ -29,28 +29,39 @@ public class tt {
 
 	public static void main(String[] args) throws IOException, JSONException {
 		
+		String ss  = "/home/msfaihi/install/onecall-2016x.R1.11820-linux-x64/doc/cv_sample/lassoued.fadi.pdf";
+		String[] val = ss.split("/");
+		String ll=val[val.length-1];
+		System.out.println("lll"+ll);
+		String[] name = ll.split("\\.");
+		System.out.println(name[0]+" "+name[1]);
 		
-		List<String> ans = parseAnswers("5173426");
+		/*List<String> ans = parseAnswers("440558");
 		
-		System.out.println("final result is:"+Arrays.toString(ans.toArray()));
+		System.out.println("final result is:"+Arrays.toString(ans.toArray()));*/
 		
-		HashMap<String, String> ques = parseQuestions("5173426");
+		/*HashMap<String, String> ques = parseQuestions("5820010");
 		for (Entry<String, String> entry2 : ques.entrySet()) {
 	    	  String title = entry2.getKey() ;
 	    	  String q = entry2.getValue() ;
 	    	  System.out.println("key "+title+"\n value "+q);
-			}
+			}*/
+		
+		/*List<String> quest = parseQuestions("440558");
+		for (int i = 0; i < quest.size(); i++) {
+			System.out.println("question : "+quest);
+		}*/
 		
 		
 	      
-	      String link = parseLink("5173426");
+	     /* String link = parseLink("440558");
 	      System.out.println("link is:"+link);
 	      
-	      List<String> str = parseTags("5173426");
+	      List<String> str = parseTags("440558");
 	      for (int i = 0; i < str.size(); i++) {
 				String q = str.get(i);
 				System.out.println(q);
-			}
+			}*/
 	      
 	      
 	}
@@ -83,7 +94,35 @@ public class tt {
 	    return str;	
 	}
 	
-	public static HashMap<String, String> parseQuestions(String login) throws IOException, JSONException{
+	
+public static List<String> parseQuestions(String login) throws IOException, JSONException{
+	List<String> ques = new ArrayList<String>();
+		String url = "https://api.stackexchange.com/2.2/users/"+login+"/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((";
+		byte[] result = parse(url);
+		String message = new String(result, "UTF-8");
+	    JSONObject myResponse = new JSONObject(message);
+	    JSONArray arr1 = new JSONArray();
+		arr1 = myResponse.getJSONArray("items");
+		ques.add(arr1.getJSONObject(0).get("link").toString());
+	    Boolean more = myResponse.getBoolean("has_more");
+	    int p=2;
+	    while (more==true && p<10) {
+	    	String	res = "https://api.stackexchange.com/2.2/users/"+login+"/questions?page="+p+"&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((";
+			byte[] moreResult = parse(res);
+			String mess = new String(moreResult, "UTF-8");
+			JSONObject myResp = new JSONObject(mess);
+			JSONArray arr = new JSONArray();
+			arr = myResp.getJSONArray("items");
+			ques.add(arr.getJSONObject(0).get("link").toString());
+		    
+		    p++;
+	    }
+	    return ques;	
+	}
+
+
+	
+	/*public static HashMap<String, String> parseQuestions(String login) throws IOException, JSONException{
 		
 		String url = "https://api.stackexchange.com/2.2/users/"+login+"/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((";
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -110,7 +149,7 @@ public class tt {
 		    p++;
 	    }
 	    return map;	
-	}
+	}*/
 	
 	
 	

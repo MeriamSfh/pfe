@@ -45,30 +45,26 @@ public class TwitterConnector extends Connector implements CVComponent {
 	public void scan(PushAPI papi, String scanMode, Object scanModeConfig) throws Exception {
 		
 		PartContainer partList = new PartContainer();
-		//List<String> login = new ArrayList<String>();
 		try { 
 			Class.forName(driver).newInstance(); 
 			Connection conn = DriverManager.getConnection(url); 
 			Statement st = conn.createStatement(); 
-			ResultSet res = st.executeQuery("Select * from Candidats"); 
+			ResultSet res = st.executeQuery("Select login_twitter from Candidats"); 
 			while (res.next()) { 
-				MetaContainer metaList = new MetaContainer();
 				String login = res.getString("login_twitter") ;  
-				//logger.info("login!!!!!!!!!!!!"+login);
-				String name = getname(login);
-					//String name = login.get(f);
-					//logger.info("name!!!!!!!!!!!!"+name);
-				List<String> dates = getdate(login);
-					//logger.info("dates!!!!!!!!!!!!"+dates);
-				List<String> tweets = gettweet(login);
-					//logger.info("tweets!!!!!!!!!!!!"+tweets);
-					metaList.addMeta("login_twitter", name);
-					for (int i = 0; i < tweets.size(); i++) {
-						metaList.addMeta("tweet_text", tweets.get(i));
-					}
-					for (int k = 0; k < dates.size(); k++) {
-						metaList.addMeta("created_at", dates.get(k));
-					}
+				String response = parse("http://149.202.64.60:8888/search/"+login);
+				JSONObject myResponse = new JSONObject(response);
+				String tweets_count = myResponse.get("tweets_count").toString();
+				String followers_count = myResponse.get("followers_count").toString();
+				String average_tweet_per_day = myResponse.get("average_tweet_per_day").toString();
+				String name = myResponse.get("screen_name").toString();
+			
+				MetaContainer metaList = new MetaContainer();
+				metaList.addMeta("login_twitter", name);
+				metaList.addMeta("tweets_count", tweets_count);
+				metaList.addMeta("followers_count", followers_count);
+				metaList.addMeta("average_tweet_per_day", average_tweet_per_day);
+				
 					String uri = name;
 					
 					papi.addDocument(new Document(uri, "0", partList, metaList));
@@ -77,45 +73,10 @@ public class TwitterConnector extends Connector implements CVComponent {
 			st.close();
 			conn.close(); 
 			} catch (Exception e) { 
-				logger.info("error in db"); 
+				logger.info("error in twitter"); 
 				}
-		
-		
 	}
-	
-	public static String getname(String login) throws Exception {
-		String res = parse("http://149.202.64.60:8888/search/"+login);
-		JSONObject myResponse = new JSONObject(res);
-		String name = myResponse.get("screen_name").toString();
-		return name;
-		}
-	
-	
-	public static List<String> getdate(String login) throws Exception {
-		List<String> dates = new ArrayList<String>();
-		String res = parse("http://149.202.64.60:8888/search/"+login);
-		JSONObject myResponse = new JSONObject(res);
-		JSONArray arr1 = new JSONArray();
-		arr1 = myResponse.getJSONArray("timeline");
-		for (int i = 0; i < arr1.length(); i++) {
-			
-			dates.add(arr1.getJSONObject(i).getString("created_at"));
-		}
-		return dates;
-		}
-	
-	public static List<String> gettweet(String login) throws Exception {
-		List<String> tweets = new ArrayList<String>();
-		String res = parse("http://149.202.64.60:8888/search/"+login);
-		JSONObject myResponse = new JSONObject(res);
-		JSONArray arr1 = new JSONArray();
-		arr1 = myResponse.getJSONArray("timeline");
-		for (int i = 0; i < arr1.length(); i++) {
-			
-			tweets.add(arr1.getJSONObject(i).getString("text"));
-		}
-		return tweets;
-		}
+		
 	
 	
 public static String parse(String purl) throws Exception {

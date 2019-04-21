@@ -57,7 +57,7 @@ public class GitConnector extends Connector implements CVComponent {
 				metaList.addMeta("followers", Integer.toString(followers));
 				metaList.addMeta("following", Integer.toString(following));
 				metaList.addMeta("total_projets", Integer.toString(nbre));
-				metaList.addMeta("url", link);
+				metaList.addMeta("link", link);
 				String uri = login;
 				papi.addDocument(new Document(uri, "0", partList, metaList));
 				

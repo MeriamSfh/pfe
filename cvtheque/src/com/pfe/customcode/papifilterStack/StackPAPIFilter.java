@@ -26,9 +26,9 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
-@PropertyLabel(value = "Stack")	
+@PropertyLabel(value = "Label")	
 @CVComponentConfigClass(configClass = StackPAPIFilterConfig.class)
-@CVComponentDescription(value = "Stack papi filter")
+@CVComponentDescription(value = "Stack ans papi filter")
 public class StackPAPIFilter extends PipedPushAPI implements CVComponent, PushAPIFilter {
 
 	private Logger logger = Logger.getLogger(StackPAPIFilter.class);
@@ -56,6 +56,7 @@ public class StackPAPIFilter extends PipedPushAPI implements CVComponent, PushAP
 			answers.add(arr1.getJSONObject(0).get("answer_id").toString()); 
 			questions.add(arr1.getJSONObject(0).get("question_id").toString());	
 			resultat.add("https://stackoverflow.com/questions/"+questions.get(0)+"/#"+answers.get(0));
+			document.addMeta("answers", resultat.get(0) );
 	    Boolean more = myResponse.getBoolean("has_more");
 	    while (more==true && p<10) {
 	    	
@@ -71,7 +72,7 @@ public class StackPAPIFilter extends PipedPushAPI implements CVComponent, PushAP
 	    }	
 	    for (int i = 1; i < answers.size(); i++) {
 	    	resultat.add("https://stackoverflow.com/questions/"+questions.get(i)+"/#"+answers.get(i));
-	    	document.addMeta("answer", resultat.get(i) );
+	    	document.addMeta("answers", resultat.get(i) );
 		}
 		} catch (Exception e) {
 			logger.info("parsing error");

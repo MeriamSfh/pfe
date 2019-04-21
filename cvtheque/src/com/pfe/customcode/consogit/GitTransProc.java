@@ -20,26 +20,17 @@ public class GitTransProc implements IJavaAllUpdatesTransformationProcessor {
 
     @Override
     public String getTransformationDocumentType() {
-        return "cv";
+        return "projet";
     }
 
     @Override
     public void process(final IJavaAllUpdatesTransformationHandler handler,
                          final IMutableTransformationDocument document) throws Exception {
-    	document.setType("cv");
 
-        final String filename = document.getMeta("file_name");
-        if (filename == null || filename.isEmpty()) {
-            throw new Exception("File name not available");
-        }
-        final String[] values = filename.split("\\.");
-        LOGGER.info(values);
-        if (values == null || values.length == 0) {
-            throw new Exception("Invalid file name");
-        }
-        LOGGER.info("doc uri:[" + document.getUri() + "] candidatId:[" + values[0] + "]");
-
-        document.addArcFrom("describedBy", "candidat_id=" + values[0] + "&");
+        final String projetUri = document.getUri();
+        final String[] values = projetUri.split("\\.");
+        
+        document.addArcFrom("ref_projet", values[0]);
     }
        
 

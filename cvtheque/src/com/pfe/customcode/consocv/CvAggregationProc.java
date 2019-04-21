@@ -23,7 +23,7 @@ public final  class CvAggregationProc implements IJavaAllUpdatesAggregationProce
 
     @Override
     public void process(IJavaAllUpdatesAggregationHandler handler, IAggregationDocument document) throws Exception {
-           final String candidatName = document.getMeta("nom");
+           final String candidatName = document.getMeta("prenom");
            if (candidatName == null || candidatName.length() == 0) {
                throw new Exception("Invalid candidat name '" + candidatName + "'");
            }
@@ -32,12 +32,12 @@ public final  class CvAggregationProc implements IJavaAllUpdatesAggregationProce
 
            // find document related to the country
            // Goal: be able to consolidate information of pdf document with country database record
-           final List<IAggregationDocument> pathsEnds = GraphMatchHelpers.getPathsEnd(handler.match(document, "describedBy"));
+           final List<IAggregationDocument> pathsEnds = GraphMatchHelpers.getPathsEnd(handler.match(document, "curriculum vitae"));
            for (IAggregationDocument file : pathsEnds) {
                LOGGER.info("File found: " + file.getUri());
 
-             // document.withPart("master", file.getPart("master"));
-               document.withMeta("hasfile", "yes");
+               document.withPart("master", file.getPart("master"));
+               document.withMeta("hasCV", "yes");
            }
    }
 }
