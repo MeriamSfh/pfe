@@ -79,5 +79,13 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/gson-2.6.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/DELL/Desktop/jar/org.codehaus.jackson.mapper.jar/org.codehaus.jackson.mapper.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_201"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/tika/org.apache.tika.jar/org.apache.tika.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/tika/org.apache.tika.parsers.jar/org.apache.tika.parsers.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/pdfonej_t_p/pdfonej_t_p5.5.1013.618/bin/PDFOne.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/jPDFFields.v2018R1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/pdf/jar_files (2)/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/pdf/jar_files (2)/fontbox-2.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/pdf/jar_files (2)/pdfbox-2.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DELL/Desktop/jar/portal-kernel.jar/portal-kernel.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

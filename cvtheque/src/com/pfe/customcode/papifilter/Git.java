@@ -22,8 +22,21 @@ import com.exalead.papi.helper.Meta;
 public class Git {
 
 	public static void main(String[] args) throws Exception {
-		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
-		hmap = getMore("anissalam");
+		List<String> titre = getTitre("AdamLindenthal");
+		List<String> langage = getLangage("AdamLindenthal");
+		List<String> des = getdescription("AdamLindenthal");
+		List<String> htmlurl= getUrlProjet("AdamLindenthal") ;
+		for (int i = 0; i < langage.size(); i++) {
+			System.out.println("titre: "+titre.get(i));
+			System.out.println("lag: "+langage.get(i));
+			System.out.println("des: "+des.get(i));
+			System.out.println("html url: "+htmlurl.get(i));
+			System.out.println("---------------------------");
+		}
+
+		
+		/*HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
+		hmap = getMore("AdamLindenthal");*/
 
 		/*Set set = map.entrySet();
 	      Iterator iterator = set.iterator();
@@ -33,32 +46,22 @@ public class Git {
 	         System.out.println(mentry.getValue());
 	      }*/
 	
-		List<String> names = new ArrayList<String>();
+		/*List<String> names = new ArrayList<String>();
 		List<String> langages = new ArrayList<String>();
 		List<String> description = new ArrayList<String>();
 		HashMap<String, String> map = new HashMap<String, String>();
-		
-		 
 		for (Entry<String, HashMap<String, String>> entry : hmap.entrySet()) {
 			names.add(entry.getKey()) ;
-			
 			map = hmap.get(entry.getKey());
 		      for (Entry<String, String> entry2 : map.entrySet()) {
-		    	  
-		    	
 		    	  langages.add(entry2.getKey()) ;
-		      
 		    	  description.add(entry2.getValue()) ;
-		    	  
 				}
-			
 		}
-		
-		
 		for (int i = 0; i < names.size(); i++) {
 			System.out.println(names.get(i)+"langages: "+langages.get(i)+"description: "+description.get(i));
 	    	 
-		}
+		}*/
 	      
 		
 	
@@ -125,7 +128,7 @@ public class Git {
 		return link;
 	}
 	
-	public static HashMap<String, HashMap<String, String>> getMore(String login) throws Exception  {
+	/*public static HashMap<String, HashMap<String, String>> getMore(String login) throws Exception  {
 		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
 		String urlRepos =getApiRepos(url);
 		
@@ -160,9 +163,194 @@ public class Git {
 		}
 		}
 		return hmap;
+	}*/
+	
+	public static List<String> getMoredescription(String login) throws Exception  {
+		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String urlRepos =getApiRepos(url);
+		List<String> des = new ArrayList<String>();
+		List<String> des2 = new ArrayList<String>();
+		des = getdescription(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URLConnection conn = obj.openConnection();
+		String str = conn.getHeaderField("Link");
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
+		int k = 0;
+		while (k<strList.size()) {
+			String text = strList.get(k);
+			if (text.contains("next")==true) {
+				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+				des2 = getdescription(link);
+				des.addAll(des2);
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+			}else {
+				k++;
+			}
+		}
+		}
+		return des;
 	}
 	
-	public static HashMap<String, HashMap<String, String>> getRepos(String url) throws Exception{
+	
+	
+	public static List<String> getdescription(String login) throws Exception{
+		String url = "https://api.github.com/users/"+login+"/repos?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String resRepos = parse(url);
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		List<String> des = new ArrayList<String>();
+		des.add(myFirstRespos.get("description").toString());
+		return des;
+	}
+	
+	
+	
+	
+	public static List<String> getMoreLangage(String login) throws Exception  {
+		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String urlRepos =getApiRepos(url);
+		List<String> langages = new ArrayList<String>();
+		List<String> langages2 = new ArrayList<String>();
+		langages = getLangage(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URLConnection conn = obj.openConnection();
+		String str = conn.getHeaderField("Link");
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
+		int k = 0;
+		while (k<strList.size()) {
+			String text = strList.get(k);
+			if (text.contains("next")==true) {
+				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+				langages2 = getLangage(link);
+				langages.addAll(langages2);
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+			}else {
+				k++;
+			}
+		}
+		}
+		return langages;
+	}
+	
+	
+	
+	public static List<String> getLangage(String login) throws Exception{
+		String url = "https://api.github.com/users/"+login+"/repos?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String resRepos = parse(url);
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		List<String> langages = new ArrayList<String>();
+		langages.add(myFirstRespos.get("language").toString());
+		return langages;
+	}
+	
+	
+	
+	public static List<String> getMoreTitre(String login) throws Exception  {
+		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String urlRepos =getApiRepos(url);
+		List<String> names = new ArrayList<String>();
+		List<String> names2 = new ArrayList<String>();
+		names = getTitre(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URLConnection conn = obj.openConnection();
+		String str = conn.getHeaderField("Link");
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
+		int k = 0;
+		while (k<strList.size()) {
+			String text = strList.get(k);
+			if (text.contains("next")==true) {
+				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+				names2 = getTitre(link);
+				names.addAll(names2);
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+			}else {
+				k++;
+			}
+		}
+		}
+		return names;
+	}
+	
+	
+	
+	public static List<String> getTitre(String login) throws Exception{
+		String url = "https://api.github.com/users/"+login+"/repos?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String resRepos = parse(url);
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		List<String> names = new ArrayList<String>();
+		names.add(myFirstRespos.get("name").toString());
+		return names;
+	}
+	
+	
+	
+	
+	public static List<String> getMoreUrlProjet(String login) throws Exception  {
+		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String urlRepos =getApiRepos(url);
+		List<String> htmlurl = new ArrayList<String>();
+		List<String> htmlurl2 = new ArrayList<String>();
+		htmlurl = getUrlProjet(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		String urlprojet2="";
+		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URLConnection conn = obj.openConnection();
+		String str = conn.getHeaderField("Link");
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
+		int k = 0;
+		while (k<strList.size()) {
+			String text = strList.get(k);
+			if (text.contains("next")==true) {
+				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+				htmlurl2 = getUrlProjet(link);
+				htmlurl.addAll(htmlurl2);
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+			}else {
+				k++;
+			}
+		}
+		}
+		return htmlurl;
+	}
+	
+	
+	
+	public static List<String> getUrlProjet(String login) throws Exception{
+		String url = "https://api.github.com/users/"+login+"/repos?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String resRepos = parse(url);
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		List<String> htmlurl = new ArrayList<String>();
+		htmlurl.add(myFirstRespos.get("html_url").toString());
+		return htmlurl;
+	}
+	
+	/*public static HashMap<String, HashMap<String, String>> getRepos(String url) throws Exception{
 		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
 		HashMap<String, String> hmap2 = new HashMap<String, String>();
 		List<String> name = new ArrayList<String>();
@@ -177,7 +365,7 @@ public class Git {
 		hmap.put(myFirstRespos.get("name").toString(), hmap2);
 		 
 		return hmap;
-	}
+	}*/
 	
 public static String parse(String purl) throws Exception {
 	    

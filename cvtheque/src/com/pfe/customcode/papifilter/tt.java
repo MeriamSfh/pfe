@@ -29,16 +29,33 @@ public class tt {
 
 	public static void main(String[] args) throws IOException, JSONException {
 		
-		String ss  = "/home/msfaihi/install/onecall-2016x.R1.11820-linux-x64/doc/cv_sample/lassoued.fadi.pdf";
+		/*String ss  = "/home/msfaihi/install/onecall-2016x.R1.11820-linux-x64/doc/cv_sample/lassoued.fadi.pdf";
 		String[] val = ss.split("/");
 		String ll=val[val.length-1];
 		System.out.println("lll"+ll);
 		String[] name = ll.split("\\.");
-		System.out.println(name[0]+" "+name[1]);
+		System.out.println(name[0]+" "+name[1]);*/
 		
-		/*List<String> ans = parseAnswers("440558");
+		/*String s = "{"
+				+ " \"universites\": ["
+		         + "                  \"ESC Tunis & IHEC Carthage\","
+		           +"               \"UIB - Groupe Soci\u00e9t\u00e9 G\u00e9n\u00e9rale\" "
+		              +         "]"
+		           + "}" ;
 		
-		System.out.println("final result is:"+Arrays.toString(ans.toArray()));*/
+		JSONObject rep = new JSONObject(s);
+JSONArray arr = new JSONArray();
+		
+		arr = rep.getJSONArray("universites");
+		String univ = "";
+		for (int i = 0; i < arr.length(); i++) {
+			univ = arr.getString(i) ;
+			System.out.println("sss: "+univ);
+		}*/		
+		
+		List<String> ans = parseAnswers("9515207");
+		
+		System.out.println("final result is:"+Arrays.toString(ans.toArray()));
 		
 		/*HashMap<String, String> ques = parseQuestions("5820010");
 		for (Entry<String, String> entry2 : ques.entrySet()) {
@@ -47,21 +64,22 @@ public class tt {
 	    	  System.out.println("key "+title+"\n value "+q);
 			}*/
 		
-		/*List<String> quest = parseQuestions("440558");
-		for (int i = 0; i < quest.size(); i++) {
+		List<String> quest = parseQuestions("9515207");
+		System.out.println("final quest is:"+Arrays.toString(quest.toArray()));
+		/*for (int i = 0; i < quest.size(); i++) {
 			System.out.println("question : "+quest);
 		}*/
 		
 		
 	      
-	     /* String link = parseLink("440558");
+	      String link = parseLink("9515207");
 	      System.out.println("link is:"+link);
 	      
-	      List<String> str = parseTags("440558");
+	      List<String> str = parseTags("9515207");
 	      for (int i = 0; i < str.size(); i++) {
 				String q = str.get(i);
 				System.out.println(q);
-			}*/
+			}
 	      
 	      
 	}
@@ -97,7 +115,8 @@ public class tt {
 	
 public static List<String> parseQuestions(String login) throws IOException, JSONException{
 	List<String> ques = new ArrayList<String>();
-		String url = "https://api.stackexchange.com/2.2/users/"+login+"/questions?page=1&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((";
+	//List<String> ques1 = new ArrayList<String>();
+		String url = "https://api.stackexchange.com/2.2/users/"+login+"/questions?pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((";
 		byte[] result = parse(url);
 		String message = new String(result, "UTF-8");
 	    JSONObject myResponse = new JSONObject(message);
@@ -106,14 +125,17 @@ public static List<String> parseQuestions(String login) throws IOException, JSON
 		ques.add(arr1.getJSONObject(0).get("link").toString());
 	    Boolean more = myResponse.getBoolean("has_more");
 	    int p=2;
-	    while (more==true && p<10) {
+	    while (more==true && p<5) {
 	    	String	res = "https://api.stackexchange.com/2.2/users/"+login+"/questions?page="+p+"&pagesize=1&order=desc&sort=activity&site=stackoverflow&key=ocsWH7idlVKJNNQIKAeVSQ((";
 			byte[] moreResult = parse(res);
 			String mess = new String(moreResult, "UTF-8");
 			JSONObject myResp = new JSONObject(mess);
 			JSONArray arr = new JSONArray();
 			arr = myResp.getJSONArray("items");
-			ques.add(arr.getJSONObject(0).get("link").toString());
+			for (int i = 0; i < arr.length(); i++) {
+				ques.add(arr.getJSONObject(i).get("link").toString());
+			}
+			
 		    
 		    p++;
 	    }

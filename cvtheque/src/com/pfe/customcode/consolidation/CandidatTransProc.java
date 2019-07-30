@@ -32,11 +32,13 @@ public class CandidatTransProc implements IJavaAllUpdatesTransformationProcessor
     	final String login_git = document.getMeta("login_git");
     	final String login_stackoverflow = document.getMeta("login_stackoverflow");
     	final String login_twitter = document.getMeta("login_twitter");
+    	final String login_linkedin = document.getMeta("login_linkedin");
         
-        document.addArcTo("curriculum vitae", "/%2Fhome%2Fmsfaihi%2Finstall%2Fonecall-2016x.R1.11820-linux-x64%2Fdoc%2Fcv_sample/"+ nom.trim() + "."+ prenom.trim()+".pdf");
+        document.addArcTo("curriculum vitae", "/%2Fhome%2Fmsfaihi%2Fcv_sample/"+ nom.trim() + "."+ prenom.trim()+".pdf");
         document.addArcTo("github account", login_git);
         document.addArcTo("stackoverflow account", login_stackoverflow);
         document.addArcTo("twitter account", login_twitter);
+        document.addArcTo("linkedin account", login_linkedin);
         
 	}
 

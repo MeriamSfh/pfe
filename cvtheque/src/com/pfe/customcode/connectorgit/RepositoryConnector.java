@@ -55,29 +55,19 @@ public class RepositoryConnector extends Connector implements CVComponent {
 			while (res.next()) { 
 				
 				String login = res.getString("login_git") ;  
-				System.out.println("login projet: "+login);
-				HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
-				hmap = getMore(login);
-				List<String> names = new ArrayList<String>();
-				List<String> langages = new ArrayList<String>();
-				List<String> description = new ArrayList<String>();
-				HashMap<String, String> map = new HashMap<String, String>();
-				for (Entry<String, HashMap<String, String>> entry : hmap.entrySet()) {
-					names.add(entry.getKey()) ;
-					map = hmap.get(entry.getKey());
-				      for (Entry<String, String> entry2 : map.entrySet()) {
-				    	  langages.add(entry2.getKey()) ;
-				    	  description.add(entry2.getValue()) ;
-						}
-				}
+				List<String> titre = getMoreTitre(login);
+				List<String> langage = getMoreLangage(login);
+				List<String> des = getMoredescription(login);
+				List<String> htmlurl= getMoreUrlProjet(login) ;
 				
-				for (int i = 0; i < names.size(); i++) {
+				for (int i = 0; i < titre.size(); i++) {
 					MetaContainer metaList = new MetaContainer();
+					metaList.addMeta("url_projet", htmlurl.get(i));
 					metaList.addMeta("login_git", login);
-					metaList.addMeta("titre", names.get(i));
-					metaList.addMeta("description", description.get(i));
-					metaList.addMeta("langage", langages.get(i));
-					String uri = login+"."+names.get(i);
+					metaList.addMeta("titre", titre.get(i));
+					metaList.addMeta("description", des.get(i));
+					metaList.addMeta("langage", langage.get(i));
+					String uri = login+"."+titre.get(i);
 					papi.addDocument(new Document(uri, "0", partList, metaList));
 				}
 			}
@@ -88,30 +78,28 @@ public class RepositoryConnector extends Connector implements CVComponent {
 				logger.info("error in db"); 
 				}
 	}
-	public static HashMap<String, HashMap<String, String>> getMore(String login) throws Exception  {
+	
+	public static List<String> getMoredescription(String login) throws Exception  {
 		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
 		String urlRepos =getApiRepos(url);
-		
-		
-		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
-		HashMap<String, HashMap<String, String>> hmap2 = new HashMap<String, HashMap<String, String>>();
-		
-		hmap = getRepos(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
-		
+		List<String> des = new ArrayList<String>();
+		List<String> des2 = new ArrayList<String>();
+		des = getdescription(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
 		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
 		URLConnection conn = obj.openConnection();
 		String str = conn.getHeaderField("Link");
-		
 		List<String> strList = new ArrayList<String>();
 		if (str!=null) {
-		 strList = Arrays.asList(str.split(","));
+			 strList = Arrays.asList(str.split(","));
+		
+		
 		int k = 0;
 		while (k<strList.size()) {
 			String text = strList.get(k);
 			if (text.contains("next")==true) {
 				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
-				hmap2 = getRepos(link);
-				hmap.putAll(hmap2);
+				des2 = getdescription(link);
+				des.addAll(des2);
 				URL obj2 = new URL(link);
 				URLConnection conn2 = obj2.openConnection();
 				String str2 = conn2.getHeaderField("Link");
@@ -121,19 +109,157 @@ public class RepositoryConnector extends Connector implements CVComponent {
 			}
 		}
 		}
-		return hmap;
+		return des;
 	}
 	
-	public static HashMap<String, HashMap<String, String>> getRepos(String url) throws Exception{
-		HashMap<String, HashMap<String, String>> hmap = new HashMap<String, HashMap<String, String>>();
-		HashMap<String, String> hmap2 = new HashMap<String, String>();
+	
+	
+	public static List<String> getdescription(String url) throws Exception{
 		String resRepos = parse(url);
 		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
-		hmap2.put(myFirstRespos.get("language").toString() , myFirstRespos.get("description").toString());
-		hmap.put(myFirstRespos.get("name").toString(), hmap2);
-		 
-		return hmap;
+		List<String> des = new ArrayList<String>();
+		des.add(myFirstRespos.get("description").toString());
+		return des;
 	}
+	
+	
+	
+	
+	public static List<String> getMoreLangage(String login) throws Exception  {
+		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String urlRepos =getApiRepos(url);
+		List<String> langages = new ArrayList<String>();
+		List<String> langages2 = new ArrayList<String>();
+		langages = getLangage(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URLConnection conn = obj.openConnection();
+		String str = conn.getHeaderField("Link");
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
+		int k = 0;
+		while (k<strList.size()) {
+			String text = strList.get(k);
+			if (text.contains("next")==true) {
+				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+				langages2 = getLangage(link);
+				langages.addAll(langages2);
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+			}else {
+				k++;
+			}
+		}
+		}
+		return langages;
+	}
+	
+	
+	
+	public static List<String> getLangage(String url) throws Exception{
+		String resRepos = parse(url);
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		List<String> langages = new ArrayList<String>();
+		langages.add(myFirstRespos.get("language").toString());
+		return langages;
+	}
+	
+	
+	
+	public static List<String> getMoreTitre(String login) throws Exception  {
+		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String urlRepos =getApiRepos(url);
+		List<String> names = new ArrayList<String>();
+		List<String> names2 = new ArrayList<String>();
+		names = getTitre(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URLConnection conn = obj.openConnection();
+		String str = conn.getHeaderField("Link");
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
+		int k = 0;
+		while (k<strList.size()) {
+			String text = strList.get(k);
+			if (text.contains("next")==true) {
+				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+				names2 = getTitre(link);
+				names.addAll(names2);
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+			}else {
+				k++;
+			}
+		}
+		}
+		return names;
+	}
+	
+	
+	
+	public static List<String> getTitre(String url) throws Exception{
+		String resRepos = parse(url);
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		List<String> names = new ArrayList<String>();
+		names.add(myFirstRespos.get("name").toString());
+		return names;
+	}
+	
+	
+	
+	
+	public static List<String> getMoreUrlProjet(String login) throws Exception  {
+		String url = "https://api.github.com/users/"+login+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c";
+		String urlRepos =getApiRepos(url);
+		List<String> htmlurl = new ArrayList<String>();
+		List<String> htmlurl2 = new ArrayList<String>();
+		htmlurl = getUrlProjet(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URL obj = new URL(urlRepos+"?client_id=11de3e641df591747467&client_secret=92cd066854ae4cb568f793f926a8789fbb7ce73c&page=1&per_page=1");
+		URLConnection conn = obj.openConnection();
+		String str = conn.getHeaderField("Link");
+		List<String> strList = new ArrayList<String>();
+		if (str!=null) {
+			 strList = Arrays.asList(str.split(","));
+		
+		
+		int k = 0;
+		while (k<strList.size()) {
+			String text = strList.get(k);
+			if (text.contains("next")==true) {
+				String link = text.substring(text.indexOf("<")+1, text.indexOf(">"));
+				htmlurl2 = getUrlProjet(link);
+				htmlurl.addAll(htmlurl2);
+				URL obj2 = new URL(link);
+				URLConnection conn2 = obj2.openConnection();
+				String str2 = conn2.getHeaderField("Link");
+				 strList = Arrays.asList(str2.split(","));
+			}else {
+				k++;
+			}
+		}
+		}
+		return htmlurl;
+	}
+	
+	
+	
+	public static List<String> getUrlProjet(String url) throws Exception{
+		String resRepos = parse(url);
+		JSONObject myFirstRespos = new JSONObject(resRepos.substring(resRepos.indexOf('{')));
+		List<String> htmlurl = new ArrayList<String>();
+		htmlurl.add(myFirstRespos.get("html_url").toString());
+		return htmlurl;
+	}
+	
+	
 	
 	public static String getApiRepos(String url) throws Exception{
 		String res = parse(url);

@@ -34,8 +34,10 @@ public final  class CvAggregationProc implements IJavaAllUpdatesAggregationProce
            // Goal: be able to consolidate information of pdf document with country database record
            final List<IAggregationDocument> pathsEnds = GraphMatchHelpers.getPathsEnd(handler.match(document, "curriculum vitae"));
            for (IAggregationDocument file : pathsEnds) {
-               LOGGER.info("File found: " + file.getUri());
-
+        	 //  String text = file.getMeta("invisibletext");
+        	   
+        	   
+        	   document.withMetas(file.getAllMetas());
                document.withPart("master", file.getPart("master"));
                document.withMeta("hasCV", "yes");
            }
